@@ -1,11 +1,11 @@
 import { Flex } from 'theme-ui'
-import Navbar from '@components/Navbar/Navbar'
-import Panels from '@components/Panels/Panels'
-import Toolbox from '@components/Toolbox/Toolbox'
-import CanvasArea from '@components/CanvasArea/CanvasArea'
+import Navbar from '@/scenes/Editor/Navbar/Navbar'
+import Panels from '@/scenes/Editor/Panels/Panels'
+import Toolbox from '@/scenes/Editor/Toolbox/Toolbox'
+import CanvasArea from '@/scenes/Editor/CanvasArea/CanvasArea'
 import NotSupported from '@components/NotSupported'
 import { useAppContext } from '@contexts/app/AppContext'
-import Footer from '@components/Footer'
+import Footer from '@/scenes/Editor/Footer'
 
 function Editor() {
   const { isMobile } = useAppContext()

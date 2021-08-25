@@ -3,7 +3,7 @@ import { Flex } from 'theme-ui'
 import ResizeObserver from 'resize-observer-polyfill'
 import { useAppContext } from '@contexts/app/AppContext'
 
-function AppBox({ children }) {
+function Container({ children }) {
   const containerRef = useRef<HTMLDivElement>()
   const { isMobile, setIsMobile } = useAppContext()
 
@@ -47,4 +47,4 @@ function AppBox({ children }) {
   )
 }
 
-export default AppBox
+export default Container
