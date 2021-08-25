@@ -19,8 +19,8 @@ class FrameHandler extends BaseHandler {
 
   initialize() {
     const frame = new fabric.Frame({
-      width: 600,
-      height: 400,
+      width: 1280,
+      height: 720,
       id: '',
       name: 'Initial Frame',
       fill: '#ffffff',

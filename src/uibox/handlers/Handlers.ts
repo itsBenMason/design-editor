@@ -7,12 +7,14 @@ import ObjectHandler from './ObjectsHandler'
 import TransactionHandler from './TransactionHandler'
 import ZoomHandler from './ZoomHandler'
 import PersonalizationHandler from './PersonalizationHandler'
+import TemplateHandler from './TemplateHandler'
 class Handlers {
   public frameHandler: FrameHandler
   public eventsHandler: EventsHandler
   public canvasHandler: CanvasHandler
   public objectsHandler: ObjectHandler
   public transactionHandler: TransactionHandler
+  public templateHandler: TemplateHandler
   public zoomHandler: ZoomHandler
   public canvas: FabricCanvas
   public propertiesToInclude: string[]
@@ -31,6 +33,7 @@ class Handlers {
     this.zoomHandler = new ZoomHandler(handlerOptions)
     this.eventsHandler = new EventsHandler(handlerOptions)
     this.personalizationHandler = new PersonalizationHandler(handlerOptions)
+    this.templateHandler = new TemplateHandler(handlerOptions)
   }
 
   destroy = () => {}

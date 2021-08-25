@@ -1,3 +1,3 @@
 export * from './Frame'
-export * from './Textarea'
+export * from './StaticText'
 export * from './StaticImage'

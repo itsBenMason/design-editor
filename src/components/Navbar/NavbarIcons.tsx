@@ -18,19 +18,27 @@ export function GithubIcon() {
   )
 }
 
-export function DownloadIcon(props) {
+export function DownloadIcon({ size }: { size: number }) {
   return (
-    <IconContainer {...props} className="navbar-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M11.25 15.85l-4.38-4.38a.75.75 0 0 0-1.06 1.06l4.95 4.95c.69.68 1.8.68 2.48 0l4.95-4.95a.75.75 0 1 0-1.06-1.06l-4.38 4.38V4.25a.75.75 0 1 0-1.5 0v11.6zm-7.5 3.4h16.5a.75.75 0 1 1 0 1.5H3.75a.75.75 0 1 1 0-1.5z"
-        ></path>
-      </svg>
-    </IconContainer>
+    <svg xmlns="http://www.w3.org/2000/svg" height={size} viewBox="0 0 24 24">
+      <path
+        fill="currentColor"
+        d="M11.25 15.85l-4.38-4.38a.75.75 0 0 0-1.06 1.06l4.95 4.95c.69.68 1.8.68 2.48 0l4.95-4.95a.75.75 0 1 0-1.06-1.06l-4.38 4.38V4.25a.75.75 0 1 0-1.5 0v11.6zm-7.5 3.4h16.5a.75.75 0 1 1 0 1.5H3.75a.75.75 0 1 1 0-1.5z"
+      ></path>
+    </svg>
   )
 }
 
+export function SaveIcon({ size }: { size: number }) {
+  return (
+    <svg height={size} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+      <path
+        fill="currentColor"
+        d="M35.5 279.9l148-148.4c4.7-4.7 12.3-4.7 17 0l148 148.4c4.7 4.7 4.7 12.3 0 17l-19.6 19.6c-4.8 4.8-12.5 4.7-17.1-.2L218 219.2V468c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V219.2l-93.7 97.1c-4.7 4.8-12.4 4.9-17.1.2l-19.6-19.6c-4.8-4.7-4.8-12.3-.1-17zM12 84h360c6.6 0 12-5.4 12-12V44c0-6.6-5.4-12-12-12H12C5.4 32 0 37.4 0 44v28c0 6.6 5.4 12 12 12z"
+      ></path>
+    </svg>
+  )
+}
 export function LogoIcon(props) {
   return (
     <svg {...props} fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.02 86.02">

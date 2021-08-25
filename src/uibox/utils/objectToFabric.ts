@@ -7,13 +7,13 @@ class ObjectToFabric {
   async run(item, options) {
     let object
     switch (item.type) {
-      case ObjectType.TEXTAREA:
+      case ObjectType.STATIC_TEXT:
         object = await this.staticText(item, options)
         break
       case ObjectType.STATIC_IMAGE:
         object = await this.staticImage(item, options)
         break
-      case ObjectType.STATIC_VECTOR:
+      case ObjectType.STATIC_GROUP:
         object = await this.staticVector(item, options)
         break
     }
@@ -37,7 +37,7 @@ class ObjectToFabric {
           ...(charSpacing && { charSpacing }),
           ...(lineheight && { lineheight }),
         }
-        const element = new fabric.Textarea(textOptions)
+        const element = new fabric.StaticText(textOptions)
 
         const { top, left, width, height } = element
 
