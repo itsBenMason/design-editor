@@ -1,9 +1,11 @@
 import { Flex, IconButton, Input } from 'theme-ui'
 import { useState } from 'react'
 import { DownloadIcon, LogoIcon, GithubIcon } from './NavbarIcons'
+import context from "../../uibox/editor";
+import { useEditorContext, useHandlers } from '@/uibox'
 
 function Navbar() {
-  // const { canvas } = useCanvasContext()
+  const { canvas } = useEditorContext()
   const [templateName, setTemplateName] = useState('My First Design')
   const downloadImage = () => {
     //@ts-ignore
@@ -21,6 +23,20 @@ function Navbar() {
     //   a.download = 'drawing.png'
     //   a.click()
     // }
+     const data = canvas?.toDataURL({
+      multiplier: 3,
+      top: 0,
+      left: 0,
+      height: canvas.height,
+      width: canvas.width,
+    });
+    // const data= canvas?.toDataURL("image/png");
+    if (data) {
+      const a = document.createElement('a')
+      a.href = data
+      a.download = 'drawing.png'
+      a.click()
+    }
   }
 
   return (
