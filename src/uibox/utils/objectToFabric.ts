@@ -8,7 +8,7 @@ class ObjectToFabric {
     let object
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
-        object = await this.staticText(item, options)
+        object = await this[ObjectType.STATIC_TEXT](item, options)
         break
       case ObjectType.STATIC_IMAGE:
         object = await this.staticImage(item, options)
@@ -21,7 +21,7 @@ class ObjectToFabric {
     return object
   }
 
-  staticText(item, options) {
+  [ObjectType.STATIC_TEXT](item, options) {
     return new Promise((resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)

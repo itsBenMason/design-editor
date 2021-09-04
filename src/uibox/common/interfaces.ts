@@ -46,3 +46,15 @@ export interface FabricCanvasOption {
 }
 
 export type FabricCanvas<T extends any = fabric.Canvas> = T & FabricCanvasOption
+
+//  Template
+
+export interface Template {
+  id: string
+  name: string
+  frame: {
+    width: number
+    height: number
+  }
+  objects: any[]
+}
