@@ -13,7 +13,7 @@ class ObjectToFabric {
       case ObjectType.STATIC_IMAGE:
         object = await this.staticImage(item, options)
         break
-      case ObjectType.STATIC_GROUP:
+      case ObjectType.STATIC_VECTOR:
         object = await this.staticVector(item, options)
         break
     }
@@ -97,9 +97,10 @@ class ObjectToFabric {
           if (!width || !height) {
             baseOptions.width = opts.width
             baseOptions.height = opts.height
+            baseOptions.top = options.top
+            baseOptions.left = options.left
           }
-          const object = fabric.util.groupSVGElements(objects, opts)
-
+          const object = new fabric.Svg(objects, opts, baseOptions)
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,
