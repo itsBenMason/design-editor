@@ -97,9 +97,10 @@ class ObjectToFabric {
           if (!width || !height) {
             baseOptions.width = opts.width
             baseOptions.height = opts.height
+            baseOptions.top = options.top
+            baseOptions.left = options.left
           }
-          const object = fabric.util.groupSVGElements(objects, opts)
-
+          const object = new fabric.Svg(objects, opts, baseOptions)
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,
