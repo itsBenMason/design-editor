@@ -39,7 +39,7 @@ function TemplatesPanel() {
             }}
             onClick={() => handlers.templateHandler.importTemplate(template)}
           >
-            <img width="100%" src={'https://via.placeholder.com/150'} alt="preview" />
+            <img width="100%" src={template.preview || 'https://via.placeholder.com/150'} alt="preview" />
           </Flex>
         ))}
       </Grid>
