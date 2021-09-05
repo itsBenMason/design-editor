@@ -13,7 +13,7 @@ import api from '@/services/api'
 function Editor() {
   const { isMobile } = useAppContext()
   const handlers = useHandlers()
-
+  const { setTemplates } = useAppContext()
   useEffect(() => {
     const handleSave = async (event: KeyboardEvent) => {
       if (handlers) {
@@ -30,6 +30,11 @@ function Editor() {
       window.removeEventListener('keydown', handleSave)
     }
   }, [handlers])
+
+  useEffect(() => {
+    api.getTemplates().then(templates => setTemplates(templates))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Flex sx={{ flex: 1, flexDirection: 'column' }}>

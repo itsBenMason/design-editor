@@ -6,6 +6,7 @@ import isNaN from 'lodash/isNaN'
 class ObjectToFabric {
   async run(item, options) {
     let object
+    console.log(item.type)
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item, options)
@@ -26,10 +27,10 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const metadata = item.metadata
-        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, value } = metadata
+        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, text } = metadata
         const textOptions = {
           ...baseOptions,
-          text: value ? value : 'Default Text',
+          text: text ? text : 'Default Text',
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && { fontSize: SCALE_FACTOR * fontSize }),

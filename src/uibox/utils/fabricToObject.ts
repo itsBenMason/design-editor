@@ -33,6 +33,7 @@ class ExportObject {
       fontFamily,
       textAlign,
       lineheight: lineHeight,
+      text: item.text,
     }
 
     const object = {
