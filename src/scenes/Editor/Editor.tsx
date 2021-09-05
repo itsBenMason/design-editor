@@ -20,8 +20,7 @@ function Editor() {
         const template = handlers.templateHandler.exportTemplate()
         if (event.ctrlKey && event.code === 'KeyS') {
           event.preventDefault()
-          const savedTemplate = await api.createTemplate(template)
-          console.log({ savedTemplate })
+          await api.createTemplate(template)
         }
       }
     }

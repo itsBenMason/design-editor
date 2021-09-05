@@ -6,8 +6,6 @@ class SvgObject extends fabric.Group {
   //@ts-ignore
   initialize(objects, options, others) {
     this.set('src', others.src)
-    // this.src = others.src
-    console.log({ objects, options, others })
     const object = fabric.util.groupSVGElements(objects, options)
     //@ts-ignore
     super.initialize([object], others)
@@ -25,14 +23,6 @@ class SvgObject extends fabric.Group {
     return super.toObject(propertiesToInclude, {
       src: this.src,
     })
-  }
-
-  static fromObject(options, callback) {
-    console.log('NOT IMPLEMENTED YET')
-    // fabric.util.loadImage(options.src, function (img) {
-    //   // @ts-ignore
-    //   return callback && callback(new fabric.StaticImage(img, options))
-    // })
   }
 }
 

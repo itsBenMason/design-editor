@@ -3,7 +3,6 @@ import { ObjectType, SCALE_FACTOR } from '../common/constants'
 class ExportObject {
   run(item, options) {
     let object
-    console.log(item.type)
     switch (item.type) {
       case ObjectType.STATIC_IMAGE:
         object = this[ObjectType.STATIC_IMAGE](item, options)
@@ -46,7 +45,6 @@ class ExportObject {
 
   [ObjectType.STATIC_IMAGE](item, options) {
     const baseOptions = this.getBaseOptions(item, options)
-    console.log({ baseOptions })
     const object = {
       ...baseOptions,
       metadata: {

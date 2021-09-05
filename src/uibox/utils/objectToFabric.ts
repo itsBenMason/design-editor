@@ -6,7 +6,6 @@ import isNaN from 'lodash/isNaN'
 class ObjectToFabric {
   async run(item, options) {
     let object
-    console.log(item.type)
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item, options)
@@ -15,10 +14,9 @@ class ObjectToFabric {
         object = await this[ObjectType.STATIC_IMAGE](item, options)
         break
       case ObjectType.STATIC_VECTOR:
-        object = await this[ObjectType.STATIC_IMAGE](item, options)
+        object = await this[ObjectType.STATIC_VECTOR](item, options)
         break
     }
-
     return object
   }
 
@@ -58,7 +56,6 @@ class ObjectToFabric {
 
   [ObjectType.STATIC_IMAGE](item, options) {
     return new Promise(async (resolve, reject) => {
-      console.log({ item })
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const src = item.metadata.src
@@ -89,6 +86,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_VECTOR](item, options) {
+    console.log('ADDING STATIC VECTOR')
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)
