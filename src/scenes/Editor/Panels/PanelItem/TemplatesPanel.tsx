@@ -36,6 +36,7 @@ function TemplatesPanel() {
             sx={{
               alignItems: 'center',
               cursor: 'pointer',
+              background: '#ffffff',
             }}
             onClick={() => handlers.templateHandler.importTemplate(template)}
           >
