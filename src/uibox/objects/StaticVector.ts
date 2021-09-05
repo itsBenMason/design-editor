@@ -6,7 +6,8 @@ class SvgObject extends fabric.Group {
   //@ts-ignore
   initialize(objects, options, others) {
     this.set('src', others.src)
-    this.src = others.src
+    // this.src = others.src
+    console.log({ objects, options, others })
     const object = fabric.util.groupSVGElements(objects, options)
     //@ts-ignore
     super.initialize([object], others)

@@ -46,7 +46,7 @@ class ExportObject {
 
   [ObjectType.STATIC_IMAGE](item, options) {
     const baseOptions = this.getBaseOptions(item, options)
-
+    console.log({ baseOptions })
     const object = {
       ...baseOptions,
       metadata: {
@@ -75,10 +75,12 @@ class ExportObject {
     const baseOptions = {
       left: left / SCALE_FACTOR - options.left / SCALE_FACTOR,
       top: top / SCALE_FACTOR - options.top / SCALE_FACTOR,
-      width: (width * scaleX) / SCALE_FACTOR,
-      height: (height * scaleY) / SCALE_FACTOR,
+      width: width / SCALE_FACTOR,
+      height: height / SCALE_FACTOR,
       originX,
       originY,
+      scaleX,
+      scaleY,
       type,
     }
     return baseOptions

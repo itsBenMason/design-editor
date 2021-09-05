@@ -58,6 +58,7 @@ class ObjectToFabric {
 
   [ObjectType.STATIC_IMAGE](item, options) {
     return new Promise(async (resolve, reject) => {
+      console.log({ item })
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const src = item.metadata.src
