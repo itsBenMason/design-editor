@@ -6,7 +6,7 @@ function TextPanel() {
 
   const addHeading = () => {
     const options = {
-      type: 'Textarea',
+      type: 'StaticText',
       width: 800,
       metadata: {
         fontWeight: 700,
@@ -21,7 +21,7 @@ function TextPanel() {
 
   const addSubheading = () => {
     const options = {
-      type: 'Textarea',
+      type: 'StaticText',
       width: 800,
       metadata: {
         value: 'Add a subheading',
@@ -36,7 +36,7 @@ function TextPanel() {
 
   const addTextBody = () => {
     const options = {
-      type: 'Textarea',
+      type: 'StaticText',
       width: 800,
       metadata: {
         value: 'Add a little bit of body text',

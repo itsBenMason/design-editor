@@ -22,7 +22,8 @@ const theme: Theme = {
     border: 'rgba(0,0,0,0.3)',
   },
   fonts: {
-    body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    body:
+      'Open Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: 'inherit',
     monospace: 'Menlo, monospace',
   },
@@ -68,6 +69,7 @@ const theme: Theme = {
   },
   buttons: {
     primary: {
+      fontFamily: 'body',
       color: 'background',
       bg: 'primary',
       fontWeight: 'bold',
@@ -81,12 +83,22 @@ const theme: Theme = {
       color: 'background',
       bg: 'secondary',
     },
-    black: {
-      fontWeight: 'bold',
-      color: 'background',
-      bg: 'text',
+    white: {
+      fontFamily: 'body',
+
+      bg: 'rgba(255,255,255,1)',
+      cursor: 'pointer',
       '&:hover, &:focus': {
-        bg: 'primary',
+        bg: 'rgba(255,255,255,0.9)',
+      },
+    },
+    transparent: {
+      fontFamily: 'body',
+
+      bg: 'rgba(255,255,255,0.2)',
+      cursor: 'pointer',
+      '&:hover, &:focus': {
+        bg: 'rgba(255,255,255,0.3)',
       },
     },
   },

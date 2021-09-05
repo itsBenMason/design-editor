@@ -1,4 +1,4 @@
 export * from './Frame'
-export * from './Textarea'
+export * from './StaticText'
 export * from './StaticImage'
-export * from './Svg'
+export * from './StaticVector'
