@@ -10,16 +10,16 @@ export interface AppConfig {
 export interface Template {
   id: string;
   name: string;
-  formatSize: FormatSize;
-  shapes: Shape[];
+  frame: Frame;
+  objects: UIBoxObject[];
 }
 
-interface FormatSize {
+interface Frame {
   width: number;
   height: number;
 }
 
-type Shape = TextOptions | ImageOptions;
+type UIBoxObject = TextOptions | ImageOptions;
 
 interface BaseOptions {
   id: string;
