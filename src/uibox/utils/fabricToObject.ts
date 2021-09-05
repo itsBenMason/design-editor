@@ -3,7 +3,6 @@ import { ObjectType, SCALE_FACTOR } from '../common/constants'
 class ExportObject {
   run(item, options) {
     let object
-    console.log(item.type)
     switch (item.type) {
       case ObjectType.STATIC_IMAGE:
         object = this[ObjectType.STATIC_IMAGE](item, options)
@@ -33,6 +32,7 @@ class ExportObject {
       fontFamily,
       textAlign,
       lineheight: lineHeight,
+      text: item.text,
     }
 
     const object = {
@@ -45,7 +45,6 @@ class ExportObject {
 
   [ObjectType.STATIC_IMAGE](item, options) {
     const baseOptions = this.getBaseOptions(item, options)
-
     const object = {
       ...baseOptions,
       metadata: {
@@ -74,10 +73,12 @@ class ExportObject {
     const baseOptions = {
       left: left / SCALE_FACTOR - options.left / SCALE_FACTOR,
       top: top / SCALE_FACTOR - options.top / SCALE_FACTOR,
-      width: (width * scaleX) / SCALE_FACTOR,
-      height: (height * scaleY) / SCALE_FACTOR,
+      width: width / SCALE_FACTOR,
+      height: height / SCALE_FACTOR,
       originX,
       originY,
+      scaleX,
+      scaleY,
       type,
     }
     return baseOptions

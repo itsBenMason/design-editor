@@ -14,10 +14,9 @@ class ObjectToFabric {
         object = await this[ObjectType.STATIC_IMAGE](item, options)
         break
       case ObjectType.STATIC_VECTOR:
-        object = await this[ObjectType.STATIC_IMAGE](item, options)
+        object = await this[ObjectType.STATIC_VECTOR](item, options)
         break
     }
-
     return object
   }
 
@@ -26,10 +25,10 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const metadata = item.metadata
-        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, value } = metadata
+        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, text } = metadata
         const textOptions = {
           ...baseOptions,
-          text: value ? value : 'Default Text',
+          text: text ? text : 'Default Text',
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && { fontSize: SCALE_FACTOR * fontSize }),
@@ -87,6 +86,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_VECTOR](item, options) {
+    console.log('ADDING STATIC VECTOR')
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)
