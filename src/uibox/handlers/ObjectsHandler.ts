@@ -107,18 +107,18 @@ class ObjectHandler extends BaseHandler {
    * @param {boolean} [includeWorkarea=false]
    */
   clear = (includeFrame = false) => {
-    // if (includeFrame) {
-    //   this.canvas.clear()
-    // } else {
-    //   const frame = this.root.frameHandler.get()
-    //   this.canvas.getObjects().forEach(object => {
-    //     if (object.type !== 'Frame' && object.type !== 'group') {
-    //       this.canvas.remove(object)
-    //     }
-    //   })
-    //   frame.set('fill', '#ffffff')
-    // }
-    // this.canvas.renderAll()
+    if (includeFrame) {
+      this.canvas.clear()
+    } else {
+      const frame = this.root.frameHandler.get()
+      this.canvas.getObjects().forEach(object => {
+        if (object.type !== 'Frame') {
+          this.canvas.remove(object)
+        }
+      })
+      frame.set('fill', '#ffffff')
+    }
+    this.canvas.renderAll()
   }
 
   moveVertical = value => {

@@ -29,7 +29,7 @@ class TemplateHandler extends BaseHandler {
   }
 
   async importTemplate(template) {
-    this.root.objectsHandler.clear(true)
+    this.root.objectsHandler.clear(false)
     const frame = template.frame
     this.root.frameHandler.create(frame)
 
