@@ -11,10 +11,10 @@ class ObjectToFabric {
         object = await this[ObjectType.STATIC_TEXT](item, options)
         break
       case ObjectType.STATIC_IMAGE:
-        object = await this.staticImage(item, options)
+        object = await this[ObjectType.STATIC_IMAGE](item, options)
         break
       case ObjectType.STATIC_VECTOR:
-        object = await this.staticVector(item, options)
+        object = await this[ObjectType.STATIC_IMAGE](item, options)
         break
     }
 
@@ -55,7 +55,7 @@ class ObjectToFabric {
     })
   }
 
-  staticImage(item, options) {
+  [ObjectType.STATIC_IMAGE](item, options) {
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)
@@ -86,12 +86,11 @@ class ObjectToFabric {
     })
   }
 
-  staticVector(item, options) {
+  [ObjectType.STATIC_VECTOR](item, options) {
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const src = item.metadata.src
-
         fabric.loadSVGFromURL(src, (objects, opts) => {
           const { width, height, top, left } = baseOptions
           if (!width || !height) {
@@ -100,7 +99,7 @@ class ObjectToFabric {
             baseOptions.top = options.top
             baseOptions.left = options.left
           }
-          const object = new fabric.Svg(objects, opts, baseOptions)
+          const object = new fabric.Svg(objects, opts, { ...baseOptions, src })
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,

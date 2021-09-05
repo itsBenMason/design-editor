@@ -6,16 +6,23 @@ export class StaticImageObject extends fabric.Image {
   //@ts-ignore
   initialize(element, options) {
     this.subtype = options.subtype
+    // this.set('crossOrigin', 'anonymous')
     //@ts-ignore
     super.initialize(element, options)
     return this
   }
 
   static fromObject(options, callback) {
-    fabric.util.loadImage(options.src, function (img) {
+    fabric.util.loadImage(
+      options.src,
+      function (img) {
+        // @ts-ignore
+        return callback && callback(new fabric.StaticImage(img, options))
+      },
+      null,
       // @ts-ignore
-      return callback && callback(new fabric.StaticImage(img, options))
-    })
+      { crossOrigin: 'anonymous' }
+    )
   }
 
   toObject(propertiesToInclude = []) {

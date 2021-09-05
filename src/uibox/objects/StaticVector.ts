@@ -1,10 +1,12 @@
 import { fabric } from 'fabric'
 
 class SvgObject extends fabric.Group {
-  static type = 'Svg'
+  static type = 'StaticVector'
   public src: string
   //@ts-ignore
   initialize(objects, options, others) {
+    this.set('src', others.src)
+    this.src = others.src
     const object = fabric.util.groupSVGElements(objects, options)
     //@ts-ignore
     super.initialize([object], others)
