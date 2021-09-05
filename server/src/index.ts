@@ -5,6 +5,7 @@ import templateRoutes from "./routes/templates";
 import errorHandler from "./middlewares/error-handler";
 import notFound from "./middlewares/not-found-handler";
 import cors from "cors";
+import _ from "./uibox/designManager";
 class App {
   public app: Application;
   constructor() {

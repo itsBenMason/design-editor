@@ -43,9 +43,9 @@ class Controller {
     }
   }
 
-  public async getById(id: string) {
+  public async getById(id: string): Promise<Template> {
     try {
-      const data = await this.client.findOneById("templates", id);
+      const data = (await this.client.findOneById("templates", id)) as Template;
       return data;
     } catch (err) {
       throw new Error(err);

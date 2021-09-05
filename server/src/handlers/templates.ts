@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import TemplatesController from "../controllers/templates";
+import designManager from "../uibox/designManager";
 
 class TemplatesHandler {
   private controller: TemplatesController;
@@ -10,6 +11,7 @@ class TemplatesHandler {
     this.getById = this.getById.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
+    this.downloadById = this.downloadById.bind(this);
   }
 
   public async get(req: Request, res: Response, next: NextFunction) {
@@ -27,6 +29,21 @@ class TemplatesHandler {
       const template = await this.controller.getById(id);
       return res.send(template);
     } catch (err) {
+      next(err);
+    }
+  }
+
+  public async downloadById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = req.params.id as string;
+      const template = await this.controller.getById(id);
+      await designManager.loadTemplate(template);
+      // console.log("IMPORTED TEMPLATE");
+      const data = await designManager.downloadTemplate();
+      // console.log({ data });
+      return res.send(data);
+    } catch (err) {
+      console.log("err", err);
       next(err);
     }
   }
