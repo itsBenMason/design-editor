@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Flex } from 'theme-ui'
 import ResizeObserver from 'resize-observer-polyfill'
-import { useAppContext } from '@contexts/app/AppContext'
+import { useAppContext } from '@contexts/AppContext'
 
 function Container({ children }) {
   const containerRef = useRef<HTMLDivElement>()

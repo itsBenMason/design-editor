@@ -9,7 +9,6 @@
     "classnames": "^2.3.1",
     "craco": "^0.0.3",
     "fabric": "^4.5.1",
-    "focus-visible": "^5.2.0",
     "i18next": "^20.2.2",
     "lodash": "^4.17.21",
     "nanoid": "^3.1.22",

@@ -3,6 +3,12 @@ class ShortcutManager {
   isDelete(event: KeyboardEvent) {
     return event.key === 'Delete'
   }
+
+  // save or update template
+  isCtrlS(event: KeyboardEvent) {
+    return event.ctrlKey && event.code === 'KeyS'
+  }
+
   // select all
   isCtrlA(event: KeyboardEvent) {
     return event.ctrlKey && event.code === 'KeyA'

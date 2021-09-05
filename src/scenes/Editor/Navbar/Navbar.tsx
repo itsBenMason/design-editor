@@ -1,16 +1,12 @@
 import { Flex, Input, Button } from 'theme-ui'
 import { useState } from 'react'
 import { DownloadIcon, LogoIcon } from './NavbarIcons'
-import { useEditorContext, useHandlers } from '@/uibox'
+import { useEditorContext } from '@/uibox'
 
 function Navbar() {
   const { canvas } = useEditorContext()
   const [templateName, setTemplateName] = useState('My First Design')
-  const handlers = useHandlers()
   const downloadImage = () => {
-    const template = handlers.templateHandler.exportTemplate()
-    console.log({ template })
-
     const data = canvas?.toDataURL({
       multiplier: 3,
       top: 0,
@@ -18,7 +14,6 @@ function Navbar() {
       height: canvas.height,
       width: canvas.width,
     })
-    // const data= canvas?.toDataURL("image/png");
     if (data) {
       const a = document.createElement('a')
       a.href = data
