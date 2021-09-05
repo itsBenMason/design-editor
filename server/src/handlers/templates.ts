@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import TemplatesController from "../controllers/templates";
+import { uploadImageToS3 } from "../services/aws";
 import designManager from "../uibox/designManager";
 
 class TemplatesHandler {
@@ -38,9 +39,7 @@ class TemplatesHandler {
       const id = req.params.id as string;
       const template = await this.controller.getById(id);
       await designManager.loadTemplate(template);
-      // console.log("IMPORTED TEMPLATE");
       const data = await designManager.downloadTemplate();
-      // console.log({ data });
       return res.send(data);
     } catch (err) {
       console.log("err", err);
@@ -51,7 +50,12 @@ class TemplatesHandler {
   public async create(req: Request, res: Response, next: NextFunction) {
     try {
       const data = req.body;
-      const template = await this.controller.create(data);
+      await designManager.loadTemplate(data);
+      const base64Image = await designManager.downloadTemplate();
+      const imageURL = await uploadImageToS3(base64Image);
+
+      const template = await this.controller.create({ ...data, preview: imageURL });
+
       return res.send(template);
     } catch (err) {
       next(err);

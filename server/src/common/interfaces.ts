@@ -1,8 +1,18 @@
 import { Request } from "express";
 
 export interface AppConfig {
-  mongoDbConnString: string;
-  mongoDbName: string;
+  mongo: {
+    connString: string;
+    name: string;
+  };
+  aws: {
+    cloudfrontAddress: string;
+    bucket: string;
+    credentials: {
+      accessKeyId: string;
+      secretAccessKey: string;
+    };
+  };
   appPort: number;
   appHost: string;
 }
@@ -12,6 +22,7 @@ export interface Template {
   name: string;
   frame: Frame;
   objects: UIBoxObject[];
+  preview: string;
 }
 
 interface Frame {

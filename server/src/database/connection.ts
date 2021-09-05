@@ -1,7 +1,5 @@
 import { Db, MongoClient, MongoError } from "mongodb";
-const connStr = "mongodb+srv://dev:dev@uibox-dev.wtl7h.mongodb.net/dev?retryWrites=true&w=majority";
-const dbName = "uibox-dev";
-
+import config from "../common/app-config";
 class MongoDBConnection {
   private static isConnected: boolean = false;
   private static db: Db;
@@ -15,8 +13,8 @@ class MongoDBConnection {
     }
   }
   public static connect(result: (err: MongoError, db: Db) => void) {
-    MongoClient.connect(connStr, { useUnifiedTopology: true }, (err, client) => {
-      this.db = client.db(dbName);
+    MongoClient.connect(config.mongo.connString, { useUnifiedTopology: true }, (err, client) => {
+      this.db = client.db(config.mongo.name);
       this.isConnected = true;
       return result(err, this.db);
     });

@@ -24,5 +24,7 @@
   "include": [
     "src"
   ],
-  "exclude": ["server"]
+  "exclude": [
+    "server"
+  ]
 }
