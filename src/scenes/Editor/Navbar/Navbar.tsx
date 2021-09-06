@@ -21,13 +21,18 @@ function Navbar() {
     if (handlers) {
       const template = handlers.templateHandler.exportTemplate()
       const image = await api.downloadTemplate(template)
-      // console.log({ image })
       const a = document.createElement('a')
-      // a.href = image.source
       a.href = await toDataURL(image.source)
 
       a.download = 'drawing.png'
       a.click()
+    }
+  }
+
+  const handleSave = async () => {
+    if (handlers) {
+      const template = handlers.templateHandler.exportTemplate()
+      await api.createTemplate(template)
     }
   }
 
@@ -55,19 +60,9 @@ function Navbar() {
         />
       </Flex>
       <Flex sx={{ alignItems: 'center', gap: '1rem' }}>
-        {/* <a
-          style={{ color: '#fff', outline: 'none', marginLeft: '1rem' }}
-          href="https://github.com/xorb/react-design-editor"
-        >
-          <IconButton>
-            <GithubIcon />
-          </IconButton>
-        </a> */}
-
         <Button
           sx={{
             height: '40px',
-            // color: 'text',
             display: 'flex',
             gap: '0.5rem',
             fontSize: '14px',
@@ -75,9 +70,9 @@ function Navbar() {
             alignItems: 'center',
           }}
           variant="transparent"
-          onClick={downloadImage}
+          onClick={handleSave}
         >
-          Share
+          Save
         </Button>
 
         <Button
