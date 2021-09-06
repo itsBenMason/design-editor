@@ -20,6 +20,17 @@ class ApiService {
     })
   }
 
+  downloadTemplate(props: Partial<Template>): Promise<{ source: string }> {
+    return new Promise((resolve, reject) => {
+      this.base
+        .post('/templates/download', props)
+        .then(({ data }) => {
+          resolve(data)
+        })
+        .catch(err => reject(err))
+    })
+  }
+
   getTemplates(): Promise<any[]> {
     return new Promise(async (resolve, reject) => {
       try {

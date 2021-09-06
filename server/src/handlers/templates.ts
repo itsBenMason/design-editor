@@ -47,6 +47,19 @@ class TemplatesHandler {
     }
   }
 
+  public async download(req: Request, res: Response, next: NextFunction) {
+    try {
+      const template = req.body;
+      await designManager.loadTemplate(template);
+      const base64Image = await designManager.downloadTemplate();
+      const imageURL = await uploadImageToS3(base64Image);
+      return res.send({ source: imageURL });
+    } catch (err) {
+      console.log("err", err);
+      next(err);
+    }
+  }
+
   public async create(req: Request, res: Response, next: NextFunction) {
     try {
       const data = req.body;

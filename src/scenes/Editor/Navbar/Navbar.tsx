@@ -1,22 +1,31 @@
 import { Flex, Input, Button } from 'theme-ui'
 import { useState } from 'react'
 import { DownloadIcon, LogoIcon } from './NavbarIcons'
-import { useEditorContext } from '@/uibox'
+import { useHandlers } from '@/uibox'
+import api from '@/services/api'
 
 function Navbar() {
-  const { canvas } = useEditorContext()
+  const handlers = useHandlers()
   const [templateName, setTemplateName] = useState('My First Design')
-  const downloadImage = () => {
-    const data = canvas?.toDataURL({
-      multiplier: 3,
-      top: 0,
-      left: 0,
-      height: canvas.height,
-      width: canvas.width,
-    })
-    if (data) {
+
+  const toDataURL = (url: string) => {
+    return fetch(url)
+      .then(response => {
+        return response.blob()
+      })
+      .then(blob => {
+        return URL.createObjectURL(blob)
+      })
+  }
+  const downloadImage = async () => {
+    if (handlers) {
+      const template = handlers.templateHandler.exportTemplate()
+      const image = await api.downloadTemplate(template)
+      // console.log({ image })
       const a = document.createElement('a')
-      a.href = data
+      // a.href = image.source
+      a.href = await toDataURL(image.source)
+
       a.download = 'drawing.png'
       a.click()
     }
