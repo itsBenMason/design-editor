@@ -10,6 +10,10 @@ class TemplateHandler extends BaseHandler {
     const template = {
       name: 'Untitled design',
       objects: [],
+      background: {
+        type: 'color',
+        value: frameOptions.fill ? frameOptions.fill : '#fff',
+      },
       frame: {
         width: frameOptions.width,
         height: frameOptions.height,
@@ -42,6 +46,9 @@ class TemplateHandler extends BaseHandler {
         console.log('UNABLE TO LOAD OBJECT: ', object)
       }
     }
+    this.root.frameHandler.setBackgroundColor(
+      template.background && template.background.type === 'color' ? template.background.value : '#ffffff'
+    )
     this.root.transactionHandler.save('template:load')
     this.root.transactionHandler.clear()
     this.root.zoomHandler.zoomToFit()

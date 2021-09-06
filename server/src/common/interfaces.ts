@@ -22,6 +22,10 @@ export interface Template {
   name: string;
   frame: Frame;
   objects: UIBoxObject[];
+  background: {
+    type: string;
+    value: string;
+  };
   preview: string;
 }
 

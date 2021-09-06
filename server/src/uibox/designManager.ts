@@ -17,10 +17,19 @@ class DesignManager {
     this.canvas.setWidth(width).setHeight(height);
   }
 
+  setBackground(background: { type: string; value: string }) {
+    if (!background) {
+      return;
+    }
+    this.canvas.setBackgroundColor(background.type === "color" ? background.value : "#ffffff", () => {
+      this.canvas.renderAll();
+    });
+  }
+
   async loadTemplate(template: Template) {
     this.canvas.clear();
     this.setDimensions(template.frame);
-
+    this.setBackground(template.background);
     for (const object of template.objects) {
       const element = await objectToFabric.run(object);
       if (element) {
@@ -33,7 +42,6 @@ class DesignManager {
   }
 
   async downloadTemplate() {
-    // console.log("CSACAS");
     const data = this.canvas.toDataURL({
       multiplier: 3,
       top: 0,

@@ -14,7 +14,9 @@ class TemplatesRouter {
     this.router.get("/templates", this.handlers.get);
     this.router.get("/templates/:id", this.handlers.getById);
     this.router.get("/templates/:id/download", this.handlers.downloadById);
+    this.router.post("/templates/download", this.handlers.download);
     this.router.post("/templates", this.handlers.create);
+
     this.router.put("/templates/:id", this.handlers.update);
     this.router.delete("/templates/:id", this.handlers.remove);
   }
