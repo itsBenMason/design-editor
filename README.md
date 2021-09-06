@@ -9,20 +9,22 @@ Design editor using React and FabricJS. Create images in React, draw diagrams an
 - [x] Add, remove, resize, reorder, clone, copy/paste objects
 - [ ] Group/ungroup objects
 - [ ] Object crop support
-- [ ] Grid and snap to grid support
 - [x] Zoom/pan canvas
-- [x] Import and export to JSON or image
+- [x] Save and Download design
 - [x] Context menu
 - [ ] Animation support, with Fade / Bounce / Shake / Scaling / Rotation / Flash effects
 - [x] Interation modes: selection, ctrl + drag grab
 - [x] Undo/Redo support
 - [x] Guidelines support
-- [ ] Multiple pages support
 - [ ] Presentation mode
+- [ ] Share design
+- [x] Server side image rendering
 
 ## How to start
 
-NodeJS required. Start in development mode using the following commands.
+The following steps shows how to start frontend application. Navigate to `server` directory in order to see how to start it.
+
+Start in development mode using the following commands.
 
 ```sh
 # install dependencies
@@ -56,11 +58,7 @@ REACT_APP_PIXABAY_KEY="your-key"
 
 ## Contribution
 
-Feel free to contribute by opening issues with any questions, bug reports or feature requests. Or, you can buy me a coffee.
-
-<p>
-<a href="https://www.buymeacoffee.com/xorb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important; border-radius: 0.5rem !important;" width="217" height="51"></a><br>
-</p>
+Feel free to contribute by opening issues with any questions, bug reports or feature requests.
 
 ## Author
 
