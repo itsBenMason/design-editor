@@ -3,10 +3,13 @@ import { useState } from 'react'
 import { DownloadIcon, LogoIcon } from './NavbarIcons'
 import { useHandlers } from '@/uibox'
 import api from '@/services/api'
+import { useAppContext } from '@/contexts/AppContext'
 
 function Navbar() {
   const handlers = useHandlers()
+  const { templates, setTemplates } = useAppContext()
   const [templateName, setTemplateName] = useState('My First Design')
+  const [saving, setSaving] = useState(false)
 
   const toDataURL = (url: string) => {
     return fetch(url)
@@ -31,8 +34,11 @@ function Navbar() {
 
   const handleSave = async () => {
     if (handlers) {
-      const template = handlers.templateHandler.exportTemplate()
-      await api.createTemplate(template)
+      setSaving(true)
+      const exportedTemplate = handlers.templateHandler.exportTemplate()
+      const savedTemplate = await api.createTemplate(exportedTemplate)
+      setTemplates([...templates, savedTemplate])
+      setSaving(false)
     }
   }
 
@@ -72,7 +78,7 @@ function Navbar() {
           variant="transparent"
           onClick={handleSave}
         >
-          Save
+          {saving ? 'Saving' : 'Save'}
         </Button>
 
         <Button
