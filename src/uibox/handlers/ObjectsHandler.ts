@@ -9,7 +9,9 @@ class ObjectHandler extends BaseHandler {
   create = async item => {
     const options = this.root.frameHandler.getOptions()
     const object: fabric.Object = await objectToFabric.run(item, options)
-    this.canvas.add(object)
+    const { canvas } = this
+    canvas.add(object)
+    canvas.setActiveObject(object)
   }
 
   /**
