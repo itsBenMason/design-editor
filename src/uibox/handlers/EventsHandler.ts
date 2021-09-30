@@ -50,23 +50,7 @@ class EventsHandler extends BaseHandler {
     const isCtrlKey = event.e.ctrlKey
     if (isCtrlKey) {
       this.handleZoom(event)
-    } else {
-      this.handlePan(event)
     }
-  }
-
-  handlePan = event => {
-    const delta = event.e.deltaY
-    const isShiftKey = event.e.shiftKey
-    let pointX = 0
-    let pointY = delta > 0 ? -30 : 30
-
-    if (isShiftKey) {
-      pointY = 0
-      pointX = delta > 0 ? -30 : 30
-    }
-    const point = new fabric.Point(pointX, pointY)
-    this.canvas.relativePan(point)
   }
 
   handleZoom = event => {
@@ -160,6 +144,7 @@ class EventsHandler extends BaseHandler {
 
   handleSelection = target => {
     if (target) {
+      this.context.setActiveObject(null)
       const selection = this.canvas.getActiveObject()
       this.context.setActiveObject(selection)
     } else {

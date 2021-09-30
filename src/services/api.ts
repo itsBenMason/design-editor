@@ -5,7 +5,7 @@ class ApiService {
   base: AxiosInstance
   constructor() {
     this.base = axios.create({
-      baseURL: 'https://uibox-api.herokuapp.com',
+      baseURL: 'https://api.potion.pro',
     })
   }
 
@@ -41,7 +41,16 @@ class ApiService {
       }
     })
   }
-
+  getShapes(): Promise<any[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await this.base.get('/shapes')
+        resolve(data)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
   updateTemplate(id: number, props: Partial<Template>): Promise<Template> {
     return new Promise((resolve, reject) => {
       this.base

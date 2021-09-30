@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { Flex } from 'theme-ui'
 import ResizeObserver from 'resize-observer-polyfill'
-import { useAppContext } from '@contexts/AppContext'
+import useAppContext from '@hooks/useAppContext'
 
 function Container({ children }) {
   const containerRef = useRef<HTMLDivElement>()
@@ -34,16 +33,17 @@ function Container({ children }) {
   }, [])
 
   return (
-    <Flex
+    <div
       ref={containerRef}
-      sx={{
+      style={{
         flex: 1,
+        display: 'flex',
         height: '100vh',
         width: '100vw',
       }}
     >
       {children}
-    </Flex>
+    </div>
   )
 }
 
