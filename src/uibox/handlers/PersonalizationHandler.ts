@@ -14,10 +14,11 @@ class PersonalizationHandler extends BaseHandler {
     fabric.Object.prototype.transparentCorners = false
     fabric.Object.prototype.cornerColor = '#20bf6b'
     fabric.Object.prototype.cornerStyle = 'circle'
-    fabric.Object.prototype.borderColor = '#7f66f1'
+    fabric.Object.prototype.borderColor = 'rgb(52, 231, 228)'
     fabric.Object.prototype.cornerSize = 12
-    fabric.Object.prototype.borderScaleFactor = 2.4
+    fabric.Object.prototype.borderScaleFactor = 2.75
     fabric.Object.prototype.borderOpacityWhenMoving = 0
+    fabric.Object.prototype.borderOpacity = 1
 
     fabric.Object.prototype.controls.tr = new fabric.Control({
       x: 0.5,
@@ -165,9 +166,9 @@ class PersonalizationHandler extends BaseHandler {
       withConnection: false,
     })
 
-    this.canvas.selectionColor = 'rgba(46, 204, 113, 0.15)'
-    this.canvas.selectionBorderColor = 'rgb(39, 174, 96)'
-    this.canvas.selectionLineWidth = 0.4
+    this.canvas.selectionColor = 'rgba(52, 231, 228, 0.15)'
+    this.canvas.selectionBorderColor = 'rgb(52, 231, 228)'
+    this.canvas.selectionLineWidth = 1.5
     this.canvas.on('selection:created', ev => {
       const objects = this.canvas.getActiveObjects()
       if (objects.length > 1) {
@@ -186,8 +187,8 @@ class PersonalizationHandler extends BaseHandler {
       if (target && activeObjects !== target) {
         const bound = target.getBoundingRect()
         const ctx = this.canvas.getContext()
-        ctx.strokeStyle = '#7f66f1'
-        ctx.lineWidth = 2.75
+        ctx.strokeStyle = 'rgb(52, 231, 228)'
+        ctx.lineWidth = 2.5
         ctx.strokeRect(bound.left, bound.top, bound.width, bound.height)
       }
     })

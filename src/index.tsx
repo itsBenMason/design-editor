@@ -1,25 +1,12 @@
 import ReactDOM from 'react-dom'
 import reportWebVitals from './reportWebVitals'
-import { AppProvider } from './contexts/AppContext'
-import { ThemeProvider } from 'theme-ui'
-import theme from './theme'
-import { EditorProvider } from './uibox'
-import Cotainer from './Container'
+import Providers from './Providers'
 import Routes from './Routes'
-// import 'focus-visible/dist/focus-visible'
-import './styles/styles.scss'
-import './i18n/index'
 
 ReactDOM.render(
-  <AppProvider>
-    <ThemeProvider theme={theme}>
-      <EditorProvider>
-        <Cotainer>
-          <Routes />
-        </Cotainer>
-      </EditorProvider>
-    </ThemeProvider>
-  </AppProvider>,
+  <Providers>
+    <Routes />
+  </Providers>,
   document.getElementById('root')
 )
 

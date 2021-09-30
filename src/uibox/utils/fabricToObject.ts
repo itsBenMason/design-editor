@@ -13,6 +13,9 @@ class ExportObject {
       case ObjectType.STATIC_VECTOR:
         object = this[ObjectType.STATIC_VECTOR](item, options)
         break
+      case ObjectType.STATIC_PATH:
+        object = this[ObjectType.STATIC_PATH](item, options)
+        break
     }
     return object
   }
@@ -62,6 +65,20 @@ class ExportObject {
       ...baseOptions,
       metadata: {
         src: item.src,
+      },
+    }
+
+    return object
+  }
+
+  [ObjectType.STATIC_PATH](item, options) {
+    const baseOptions = this.getBaseOptions(item, options)
+
+    const object = {
+      ...baseOptions,
+      metadata: {
+        value: item.path,
+        fill: item.fill,
       },
     }
 

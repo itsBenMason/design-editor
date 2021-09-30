@@ -28,16 +28,12 @@ class FrameHandler extends BaseHandler {
     })
     this.canvas.add(frame)
     frame.center()
-    // this.sizeFormat = this.context.defaultSizeFormat
-    // const scaledSize = this.scaleDimension(this.sizeFormat)
-    // const shadow = new fabric.Shadow({
-    //   color: '#afafaf',
-    //   blur: 2.5,
-    // })
-    // const frame = new fabric.Frame({ ...defaultFrameOptions, ...scaledSize, shadow })
-    // this.canvas.add(frame)
-    // frame.center()
-    // this.options = Object.assign(this.options, scaledSize)
+    const interval = setInterval(() => {
+      if (this.root.scrollbarHandler && this.root.scrollbarHandler.updateScrollPosition) {
+        this.root.scrollbarHandler.updateScrollPosition()
+        clearInterval(interval)
+      }
+    }, 100)
   }
 
   get = () => {
@@ -126,8 +122,8 @@ class FrameHandler extends BaseHandler {
   }
 
   getFitRatio = () => {
-    const canvasWidth = this.canvas.getWidth() - 32
-    const canvasHeight = this.canvas.getHeight() - 32
+    const canvasWidth = this.canvas.getWidth() - 180
+    const canvasHeight = this.canvas.getHeight() - 180
     const options = this.getOptions()
     let scaleX = canvasWidth / options.width
     let scaleY = canvasHeight / options.height

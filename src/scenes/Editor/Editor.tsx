@@ -1,64 +1,45 @@
-import { Flex } from 'theme-ui'
-import Navbar from '@scenes/Editor/Navbar/Navbar'
-import Panels from '@scenes/Editor/Panels/Panels'
-import Toolbox from '@scenes/Editor/Toolbox/Toolbox'
-import CanvasArea from '@scenes/Editor/CanvasArea/CanvasArea'
-import NotSupported from '@components/NotSupported'
-import { useAppContext } from '@contexts/AppContext'
-import Footer from '@scenes/Editor/Footer'
-import { useEffect } from 'react'
-import { useHandlers } from '@/uibox'
+import useAppContext from '@/hooks/useAppContext'
 import api from '@/services/api'
+import { useEffect } from 'react'
+import Navbar from './components/Navbar'
+import Panels from './components/Panels'
+import Toolbox from './components/Toolbox'
+import Footer from './components/Footer'
+import Editor from '@/uibox'
 
-function Editor() {
-  const { isMobile } = useAppContext()
-  const handlers = useHandlers()
-  const { setTemplates } = useAppContext()
-  useEffect(() => {
-    const handleSave = async (event: KeyboardEvent) => {
-      if (handlers) {
-        const template = handlers.templateHandler.exportTemplate()
-        if (event.ctrlKey && event.code === 'KeyS') {
-          event.preventDefault()
-          await api.createTemplate(template)
-        }
-      }
-    }
-    window.addEventListener('keydown', handleSave)
-    return () => {
-      window.removeEventListener('keydown', handleSave)
-    }
-  }, [handlers])
+function App() {
+  const { setTemplates, setShapes } = useAppContext()
 
   useEffect(() => {
     api.getTemplates().then(templates => setTemplates(templates))
+    api.getShapes().then(shapes => setShapes(shapes))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <Flex sx={{ flex: 1, flexDirection: 'column' }}>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        background: '#F9F9F9',
+        fontFamily: 'Uber Move Text',
+      }}
+    >
       <Navbar />
-      {isMobile === undefined ? (
-        <div>Loading</div>
-      ) : isMobile ? (
-        <NotSupported />
-      ) : (
-        <Flex sx={{ flex: 1 }}>
-          <Panels />
-          <Flex
-            sx={{
-              flex: 1,
-              flexDirection: 'column',
-            }}
-          >
-            <Toolbox />
-            <CanvasArea />
-            <Footer />
-          </Flex>
-        </Flex>
-      )}
-    </Flex>
+      <div style={{ display: 'flex', flex: 1 }}>
+        <Panels />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+          <Toolbox />
+          <div style={{ flex: 1, display: 'flex', padding: '1px' }}>
+            <Editor />
+          </div>
+          <Footer />
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default Editor
+export default App

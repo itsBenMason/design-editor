@@ -16,6 +16,9 @@ class ObjectToFabric {
       case ObjectType.STATIC_VECTOR:
         object = await this[ObjectType.STATIC_VECTOR](item, options)
         break
+      case ObjectType.STATIC_PATH:
+        object = await this[ObjectType.STATIC_PATH](item, options)
+        break
     }
     return object
   }
@@ -59,7 +62,7 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const src = item.metadata.src
-        const image = await loadImageFromURL(src)
+        const image: any = await loadImageFromURL(src)
 
         const { width, height } = baseOptions
         if (!width || !height) {
@@ -85,8 +88,31 @@ class ObjectToFabric {
     })
   }
 
+  [ObjectType.STATIC_PATH](item, options) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options)
+        const path = item.metadata.value
+        const fill = item.metadata.fill
+        const element = new fabric.StaticPath({ ...baseOptions, path, fill: fill ? fill : '#000000' })
+
+        const { top, left } = element
+
+        if (isNaN(top) || isNaN(left)) {
+          element.set({
+            top: options.top,
+            left: options.left,
+          })
+          element.scaleToWidth(320)
+        }
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   [ObjectType.STATIC_VECTOR](item, options) {
-    console.log('ADDING STATIC VECTOR')
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options)

@@ -3,15 +3,16 @@ import { useContext, useEffect, useRef } from 'react'
 import { FabricCanvas } from './common/interfaces'
 import { EditorContext } from './context'
 import Handlers from './handlers'
+import ResizeObserver from 'resize-observer-polyfill'
 import './objects'
 
 function Editor() {
-  const containerRef = useRef<HTMLDivElement>()
+  const containerRef = useRef(null)
   const context = useContext(EditorContext)
   const { setHandlers } = context
 
   useEffect(() => {
-    const container = containerRef.current
+    const container = containerRef.current as unknown as HTMLDivElement
     const { clientHeight, clientWidth } = container
 
     const canvas = new fabric.Canvas('canvas', {
@@ -20,6 +21,7 @@ function Editor() {
       width: clientWidth,
       preserveObjectStacking: true,
     }) as FabricCanvas
+
     const handlers = new Handlers({
       canvas: canvas,
       context: context,
@@ -41,7 +43,11 @@ function Editor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div ref={containerRef} style={{ flex: 1, position: 'relative' }}>
+    <div
+      id="uibox-editor-container"
+      ref={containerRef}
+      style={{ flex: 1, position: 'relative', overflow: 'hidden' }}
+    >
       <div
         style={{
           position: 'absolute',
