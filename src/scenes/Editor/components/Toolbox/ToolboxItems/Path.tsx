@@ -28,7 +28,7 @@ function Path() {
       >
         <Icons.FillColor size={24} color="#000000" />
       </Button>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />
         <Opacity />
         <Duplicate />

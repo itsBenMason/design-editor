@@ -28,7 +28,7 @@ function Image() {
       >
         <Icons.FillColor size={24} color="#000000" />
       </Button>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />
         <Opacity />
         <Duplicate />
