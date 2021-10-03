@@ -4,6 +4,7 @@ import BaseHandler from './BaseHandler'
 // import { loadImageFromURL } from '../utils/image-loader'
 import { HandlerOptions } from '../common/interfaces'
 import { FrameOptions } from '../objects'
+import { SCALE_FACTOR } from '../common/constants'
 
 class FrameHandler extends BaseHandler {
   frame
@@ -42,12 +43,12 @@ class FrameHandler extends BaseHandler {
 
   update = options => {
     // this.sizeFormat = options
-    // const frame = this.get()
-    // const { width, height } = this.scaleDimension(this.sizeFormat)
-    // this.options = Object.assign(this.options, { width, height, isPortrait: options.isPortrait })
-    // frame.set('width', width)
-    // frame.set('height', height)
-    // frame.center()
+    const frame = this.get()
+    const { width, height } = this.scaleDimension(options)
+    frame.set('width', width)
+    frame.set('height', height)
+    frame.center()
+    this.root.zoomHandler.zoomToFit()
     // this.context.setSizeFormat(options)
     // this.root.transactionHandler.save('frame:update')
     // this.root.gridHandler.draw()
@@ -112,18 +113,16 @@ class FrameHandler extends BaseHandler {
   }
 
   scaleDimension = options => {
-    // const { pixelHeight, pixelWidth, isPortrait } = options
-    // const height = isPortrait ? pixelHeight * SCALE_FACTOR : pixelWidth * SCALE_FACTOR
-    // const width = isPortrait ? pixelWidth * SCALE_FACTOR : pixelHeight * SCALE_FACTOR
-    // return {
-    //   height,
-    //   width,
-    // }
+    const { width, height } = options
+    return {
+      height: height * SCALE_FACTOR,
+      width: width * SCALE_FACTOR,
+    }
   }
 
   getFitRatio = () => {
-    const canvasWidth = this.canvas.getWidth() - 180
-    const canvasHeight = this.canvas.getHeight() - 180
+    const canvasWidth = this.canvas.getWidth() - 120
+    const canvasHeight = this.canvas.getHeight() - 120
     const options = this.getOptions()
     let scaleX = canvasWidth / options.width
     let scaleY = canvasHeight / options.height

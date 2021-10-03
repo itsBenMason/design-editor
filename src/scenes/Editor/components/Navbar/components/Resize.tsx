@@ -1,18 +1,43 @@
 import { Button, KIND } from 'baseui/button'
 import { styled, ThemeProvider, LightTheme } from 'baseui'
-import { ListItem, ListItemLabel } from 'baseui/list'
-
+import { Select, Value } from 'baseui/select'
+import { Input } from 'baseui/input'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
+import { useState } from 'react'
+import formatSizes from '@/constants/format-sizes'
+import { useHandlers } from '@/uibox'
+
+const getLabel = ({ option }: any) => {
+  return (
+    <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <div>{option.name}</div>
+      <div style={{ color: '#AFAFAF' }}>{option.description}</div>
+    </div>
+  )
+}
 
 const Container = styled('div', props => ({
   background: props.$theme.colors.background,
   color: props.$theme.colors.primary,
-  width: '240px',
+  width: '320px',
   fontFamily: 'Uber Move Text',
-  padding: '1rem 1rem',
+  padding: '2rem 2rem',
 }))
 
 export default function Resize() {
+  const [value, setValue] = useState<Value>([])
+  const [customSize, setCustomSize] = useState({ width: 0, height: 0 })
+  const handlers = useHandlers()
+  const updateFormatSize = value => {
+    setValue(value)
+    const [frame] = value
+    handlers.frameHandler.update(frame.size)
+  }
+  const applyCustomSize = () => {
+    if (customSize.width && customSize.height) {
+      handlers.frameHandler.update(customSize)
+    }
+  }
   return (
     <StatefulPopover
       focusLock
@@ -20,15 +45,37 @@ export default function Resize() {
       content={({ close }) => (
         <ThemeProvider theme={LightTheme}>
           <Container>
-            <ListItem>
-              <ListItemLabel description="description">Facebook cover</ListItemLabel>
-            </ListItem>
-            <ListItem>
-              <ListItemLabel description="description">Facebook add</ListItemLabel>
-            </ListItem>
-            <ListItem>
-              <ListItemLabel description="description">Facebook post</ListItemLabel>
-            </ListItem>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>Size templates</div>
+              <Select
+                options={formatSizes}
+                labelKey="name"
+                valueKey="id"
+                onChange={({ value }) => updateFormatSize(value)}
+                value={value}
+                getValueLabel={getLabel}
+                getOptionLabel={getLabel}
+                clearable={false}
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+              <div>Custom size</div>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <Input
+                  value={customSize.width}
+                  onChange={e => setCustomSize({ ...customSize, width: (e.target as any).value })}
+                  startEnhancer="W"
+                  placeholder="width"
+                />
+                <Input
+                  value={customSize.height}
+                  onChange={e => setCustomSize({ ...customSize, height: (e.target as any).value })}
+                  startEnhancer="H"
+                  placeholder="width"
+                />
+              </div>
+              <Button onClick={() => applyCustomSize()}>Apply</Button>
+            </div>
           </Container>
         </ThemeProvider>
       )}
