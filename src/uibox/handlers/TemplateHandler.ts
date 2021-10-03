@@ -52,7 +52,6 @@ class TemplateHandler extends BaseHandler {
     this.root.transactionHandler.save('template:load')
     this.root.transactionHandler.clear()
     this.root.zoomHandler.zoomToFit()
-    console.log(this.canvas.toJSON())
   }
 }
 export default TemplateHandler

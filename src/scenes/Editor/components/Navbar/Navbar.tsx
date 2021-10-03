@@ -6,6 +6,7 @@ import { useHandlers } from '@/uibox'
 import api from '@/services/api'
 import { useState } from 'react'
 import useAppContext from '@/hooks/useAppContext'
+import Resize from './components/Resize'
 
 const Container = styled('div', props => ({
   height: '70px',
@@ -63,6 +64,7 @@ function NavbarEditor() {
           <LogoContainer>
             <Logo size={40} />
           </LogoContainer>
+          <Resize />
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
