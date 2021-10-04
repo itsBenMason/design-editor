@@ -125,7 +125,7 @@ class ObjectToFabric {
             baseOptions.top = options.top
             baseOptions.left = options.left
           }
-          const object = new fabric.Svg(objects, opts, { ...baseOptions, src })
+          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src })
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,

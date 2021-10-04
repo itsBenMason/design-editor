@@ -5,8 +5,9 @@ import BaseHandler from './BaseHandler'
 class TransactionHandler extends BaseHandler {
   redos = []
   undos = []
-  state = {}
+  state = []
   active = false
+
   save = type => {
     try {
       if (this.state) {
@@ -15,20 +16,18 @@ class TransactionHandler extends BaseHandler {
           type,
           json,
         })
-        const canvasJSON: any = this.canvas.toJSON(this.root.propertiesToInclude)
-
+        const canvasJSON = this.canvas.toJSON(this.root.propertiesToInclude)
+        // @ts-ignore
         canvasJSON.objects.forEach(object => {
           if (object.clipPath) {
-            fabric.util.enlivenObjects(
-              [object.clipPath],
-              function (arg1) {
-                object.clipPath = arg1[0]
-              },
-              ''
-            )
+            // @ts-ignore
+
+            fabric.util.enlivenObjects([object.clipPath], function (arg1) {
+              object.clipPath = arg1[0]
+            })
           }
         })
-
+        // @ts-ignore
         this.state = canvasJSON
       }
     } catch (err) {
