@@ -4,24 +4,28 @@ import BaseHandler from './BaseHandler'
 // import { loadImageFromURL } from '../utils/image-loader'
 import { HandlerOptions } from '../common/interfaces'
 import { FrameOptions } from '../objects'
-import { SCALE_FACTOR } from '../common/constants'
+import { defaultFrameSize, SCALE_FACTOR } from '../common/constants'
 
 class FrameHandler extends BaseHandler {
   frame
   options
   sizeFormat
   backgroundimage
-
+  frameSize
   constructor(props: HandlerOptions) {
     super(props)
     // this.options = defaultFrameOptions
+    this.frameSize = {
+      width: 1280,
+      height: 720,
+    }
     this.initialize()
   }
 
   initialize() {
     const frame = new fabric.Frame({
-      width: 1280,
-      height: 720,
+      width: defaultFrameSize.width,
+      height: defaultFrameSize.height,
       id: '',
       name: 'Initial Frame',
       fill: '#ffffff',
@@ -42,16 +46,14 @@ class FrameHandler extends BaseHandler {
   }
 
   update = options => {
-    // this.sizeFormat = options
     const frame = this.get()
     const { width, height } = this.scaleDimension(options)
     frame.set('width', width)
     frame.set('height', height)
     frame.center()
     this.root.zoomHandler.zoomToFit()
-    // this.context.setSizeFormat(options)
-    // this.root.transactionHandler.save('frame:update')
-    // this.root.gridHandler.draw()
+    this.context.setFrameSize(options)
+    this.root.transactionHandler.save('frame:update')
   }
 
   setBackgroundColor = (color: string) => {
@@ -73,17 +75,17 @@ class FrameHandler extends BaseHandler {
   }
 
   create = options => {
-    // const shadow = new fabric.Shadow({
-    //   color: '#afafaf',
-    //   blur: 2.5,
-    // })
-    // this.sizeFormat = options
-    // const scaledSize = this.scaleDimension(this.sizeFormat)
-    // const frame = new fabric.Frame({ ...defaultFrameOptions, ...scaledSize, shadow })
-    // this.canvas.add(frame)
-    // frame.center()
-    // this.options = Object.assign(this.options, scaledSize)
-    // this.context.setSizeFormat(options)
+    const scaledSize = this.scaleDimension(options)
+    const frame = new fabric.Frame({
+      ...scaledSize,
+      id: '',
+      name: '',
+      fill: '#ffffff',
+      backgroundColor: '#ffffff',
+    })
+    this.canvas.add(frame)
+    frame.center()
+    this.context.setFrameSize(options)
   }
 
   getBackgroundImage = () => {

@@ -19,3 +19,8 @@ export enum ObjectTypeAlt {
   DYNAMIC_IMAGE = 'image:dynamic',
   TEXTAREA = 'Textarea',
 }
+
+export const defaultFrameSize = {
+  width: 900,
+  height: 400,
+}

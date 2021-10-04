@@ -3,9 +3,9 @@ import { styled, ThemeProvider, LightTheme } from 'baseui'
 import { Select, Value } from 'baseui/select'
 import { Input } from 'baseui/input'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import formatSizes from '@/constants/format-sizes'
-import { useHandlers } from '@/uibox'
+import { useEditorContext, useHandlers } from '@/uibox'
 
 const getLabel = ({ option }: any) => {
   return (
@@ -27,6 +27,8 @@ const Container = styled('div', props => ({
 export default function Resize() {
   const [value, setValue] = useState<Value>([])
   const [customSize, setCustomSize] = useState({ width: 0, height: 0 })
+  const { frameSize } = useEditorContext()
+
   const handlers = useHandlers()
   const updateFormatSize = value => {
     setValue(value)
@@ -38,6 +40,12 @@ export default function Resize() {
       handlers.frameHandler.update(customSize)
     }
   }
+  useEffect(() => {
+    if (frameSize) {
+      setCustomSize(frameSize)
+    }
+  }, [frameSize])
+
   return (
     <StatefulPopover
       focusLock

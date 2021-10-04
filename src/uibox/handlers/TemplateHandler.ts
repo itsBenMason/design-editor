@@ -1,3 +1,4 @@
+import { SCALE_FACTOR } from '../common/constants'
 import exportObject from '../utils/fabricToObject'
 import objectToFabric from '../utils/objectToFabric'
 import BaseHandler from './BaseHandler'
@@ -15,11 +16,10 @@ class TemplateHandler extends BaseHandler {
         value: frameOptions.fill ? frameOptions.fill : '#fff',
       },
       frame: {
-        width: frameOptions.width,
-        height: frameOptions.height,
+        width: frameOptions.width / SCALE_FACTOR,
+        height: frameOptions.height / SCALE_FACTOR,
       },
     }
-
     const objects = canvasJSON.objects.filter(
       object => object.type !== 'Frame' && object.type !== 'BackgroundImage'
     )
@@ -33,7 +33,7 @@ class TemplateHandler extends BaseHandler {
   }
 
   async importTemplate(template) {
-    this.root.objectsHandler.clear(false)
+    this.root.objectsHandler.clear(true)
     const frame = template.frame
     this.root.frameHandler.create(frame)
 

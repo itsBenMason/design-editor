@@ -2,7 +2,9 @@ import { useContext } from 'react'
 import { EditorContext } from '../context'
 
 export function useEditorContext() {
-  const { setCanvas, canvas, activeObject, setActiveObject, zoomRatio } = useContext(EditorContext)
+  const { setCanvas, canvas, activeObject, setActiveObject, zoomRatio, frameSize, setFrameSize } = useContext(
+    EditorContext
+  )
 
   return {
     setCanvas,
@@ -10,5 +12,7 @@ export function useEditorContext() {
     activeObject,
     setActiveObject,
     zoomRatio,
+    frameSize,
+    setFrameSize,
   }
 }
