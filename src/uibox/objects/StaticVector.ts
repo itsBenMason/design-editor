@@ -1,6 +1,6 @@
 import { fabric } from 'fabric'
 
-class SvgObject extends fabric.Group {
+class StaticVectorObject extends fabric.Group {
   static type = 'StaticVector'
   public src: string
   //@ts-ignore
@@ -24,20 +24,28 @@ class SvgObject extends fabric.Group {
       src: this.src,
     })
   }
+
+  static fromObject(options: any, callback: Function) {
+    fabric.loadSVGFromURL(options.src, (objects, opts) => {
+      return callback && callback(new fabric.StaticVector(objects, opts, { ...options }))
+    })
+  }
 }
 
-fabric.Svg = fabric.util.createClass(SvgObject, {
-  type: SvgObject.type,
+fabric.StaticVector = fabric.util.createClass(StaticVectorObject, {
+  type: StaticVectorObject.type,
 })
+
+fabric.StaticVector.fromObject = StaticVectorObject.fromObject
 
 export type SvgOptions = fabric.Group & { text: string }
 
 declare module 'fabric' {
   namespace fabric {
-    class Svg extends SvgObject {
+    class StaticVector extends StaticVectorObject {
       constructor(objects: any, options: any, others: any)
     }
   }
 }
 
-export default SvgObject
+export default StaticVectorObject
