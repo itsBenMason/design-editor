@@ -1,5 +1,5 @@
 import { fabric } from 'fabric'
-
+// @ts-ignore
 export class FrameObject extends fabric.Rect {
   static type = 'Frame'
   initialize(options: FrameOptions) {
@@ -21,8 +21,9 @@ export class FrameObject extends fabric.Rect {
   toJSON(propertiesToInclude: string[] = []) {
     return super.toObject(propertiesToInclude)
   }
-  static fromObject(options: FrameOptions) {
-    return new fabric.Frame(options)
+
+  static fromObject(options: FrameOptions, callback) {
+    return callback && callback(new fabric.Frame(options))
   }
 }
 
