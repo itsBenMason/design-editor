@@ -45,6 +45,7 @@ function NavbarEditor() {
 
       a.download = 'drawing.png'
       a.click()
+      a.remove()
     }
   }
 

@@ -25,27 +25,28 @@ function Panel() {
           <div
             style={{ display: 'grid', gap: '0.5rem', padding: '0 2rem 2rem', gridTemplateColumns: '1fr 1fr' }}
           >
-            {shapes.map(shape => (
-              <div
-                key={shape.id}
-                style={{
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  padding: '10px',
-                  // background: 'red',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-                onClick={() => handlers.objectsHandler.create(shape)}
-              >
-                <img
-                  width="80px"
-                  src={shape.metadata.preview || 'https://via.placeholder.com/150'}
-                  alt="preview"
-                  height="80px"
-                />
-              </div>
-            ))}
+            {shapes.map &&
+              shapes.map(shape => (
+                <div
+                  key={shape.id}
+                  style={{
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    padding: '10px',
+                    // background: 'red',
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => handlers.objectsHandler.create(shape)}
+                >
+                  <img
+                    width="80px"
+                    src={shape.metadata.preview || 'https://via.placeholder.com/150'}
+                    alt="preview"
+                    height="80px"
+                  />
+                </div>
+              ))}
           </div>
         </Scrollbars>
       </div>
