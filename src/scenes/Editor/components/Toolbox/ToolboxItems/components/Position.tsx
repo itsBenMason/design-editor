@@ -2,7 +2,7 @@ import Icons from '../../../icons'
 import { Button, KIND, SIZE } from 'baseui/button'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 
-import { useHandlers } from '@/uibox'
+import { useHandlers } from '@scenify/sdk'
 // import { useEffect, useState } from 'react'
 // import { useActiveObject } from '@/uibox/hooks/useActiveObject'
 // import { useEffect } from 'react'

@@ -2,7 +2,7 @@ import { styled, ThemeProvider, DarkTheme } from 'baseui'
 import { Button, KIND } from 'baseui/button'
 import Logo from '@components/icons/Logo'
 
-import { useHandlers } from '@/uibox'
+import { useHandlers } from '@scenify/sdk'
 import api from '@/services/api'
 import { useState } from 'react'
 import useAppContext from '@/hooks/useAppContext'
