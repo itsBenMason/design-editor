@@ -1,8 +1,9 @@
 import { PanelType } from '@/constants/app-options'
 import { SubMenuType } from '@/constants/editor'
-import { Template } from '@/uibox/common/interfaces'
+// import { Template } from '@scenify/sdk/src/common/interfaces'
 import React, { createContext, useState, FC } from 'react'
 
+type Template = any
 interface IAppContext {
   isMobile: boolean | undefined
   setIsMobile: React.Dispatch<React.SetStateAction<boolean>>

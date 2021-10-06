@@ -3,7 +3,7 @@ import Icons from '@components/icons'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { useState } from 'react'
 import useAppContext from '@/hooks/useAppContext'
-import { useHandlers } from '@/uibox'
+import { useHandlers } from '@scenify/sdk'
 
 function Panel() {
   const [value, setValue] = useState('')

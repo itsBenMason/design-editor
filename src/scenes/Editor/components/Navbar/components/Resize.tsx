@@ -5,7 +5,7 @@ import { Input } from 'baseui/input'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { useState } from 'react'
 import formatSizes from '@/constants/format-sizes'
-import { useHandlers } from '@/uibox'
+import { useHandlers } from '@scenify/sdk'
 
 const getLabel = ({ option }: any) => {
   return (
