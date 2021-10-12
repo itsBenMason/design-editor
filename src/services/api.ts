@@ -1,12 +1,11 @@
 import axios, { AxiosInstance } from 'axios'
 
 type Template = any
-
 class ApiService {
   base: AxiosInstance
   constructor() {
     this.base = axios.create({
-      baseURL: 'https://api.potion.pro',
+      baseURL: 'https://api.scenify.io',
     })
   }
 
@@ -45,7 +44,7 @@ class ApiService {
   getShapes(): Promise<any[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data } = await this.base.get('/shapes')
+        const { data } = await this.base.get('/elements')
         resolve(data)
       } catch (err) {
         reject(err)

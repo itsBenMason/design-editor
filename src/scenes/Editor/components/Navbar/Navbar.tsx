@@ -27,24 +27,16 @@ function NavbarEditor() {
   const handlers = useHandlers()
   const { templates, setTemplates } = useAppContext()
   const [saving, setSaving] = useState(false)
-  const toDataURL = (url: string) => {
-    return fetch(url)
-      .then(response => {
-        return response.blob()
-      })
-      .then(blob => {
-        return URL.createObjectURL(blob)
-      })
-  }
+
   const downloadImage = async () => {
     if (handlers) {
-      const template = handlers.templateHandler.exportTemplate()
-      const image = await api.downloadTemplate(template)
-      const a = document.createElement('a')
-      a.href = await toDataURL(image.source)
-
-      a.download = 'drawing.png'
-      a.click()
+      const data = await handlers.designHandler.toDataURL()
+      if (data) {
+        const a = document.createElement('a')
+        a.href = data
+        a.download = 'drawing.png'
+        a.click()
+      }
     }
   }
 
