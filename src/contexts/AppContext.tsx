@@ -1,6 +1,5 @@
 import { PanelType } from '@/constants/app-options'
 import { SubMenuType } from '@/constants/editor'
-// import { Template } from '@scenify/sdk/src/common/interfaces'
 import React, { createContext, useState, FC } from 'react'
 
 type Template = any

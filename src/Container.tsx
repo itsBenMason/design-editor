@@ -39,21 +39,18 @@ function Container({ children }) {
     loadFonts()
     setTimeout(() => {
       setLoaded(true)
-    }, 1000)
+    }, 3000)
   }, [])
 
   const loadFonts = () => {
     const promisesList = editorFonts.map(font => {
-      console.log(font)
       // @ts-ignore
       return new FontFace(font.name, `url(${font.url})`, font.options).load().catch(err => err)
     })
     Promise.all(promisesList)
       .then(res => {
-        console.log(res)
         res.forEach(uniqueFont => {
           if (uniqueFont && uniqueFont.family) {
-            console.log(uniqueFont)
             document.fonts.add(uniqueFont)
           }
         })
