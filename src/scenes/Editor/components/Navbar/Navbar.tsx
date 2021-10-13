@@ -1,12 +1,12 @@
 import { styled, ThemeProvider, DarkTheme } from 'baseui'
-import { Button, KIND } from 'baseui/button'
+import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
+import Icons from '../icons'
 import Logo from '@components/icons/Logo'
-
 import { useHandlers } from '@scenify/sdk'
-import api from '@/services/api'
 import { useState } from 'react'
 import useAppContext from '@/hooks/useAppContext'
 import Resize from './components/Resize'
+import api from '@/services/api'
 
 const Container = styled('div', props => ({
   height: '70px',
@@ -57,6 +57,28 @@ function NavbarEditor() {
             <Logo size={40} />
           </LogoContainer>
           <Resize />
+          <div>
+            <Button
+              onClick={() => {
+                handlers.transactionHandler.undo()
+              }}
+              size={SIZE.default}
+              kind={KIND.tertiary}
+              shape={SHAPE.square}
+            >
+              <Icons.Undo size={24} />
+            </Button>
+            <Button
+              onClick={() => {
+                handlers.transactionHandler.redo()
+              }}
+              size={SIZE.default}
+              kind={KIND.tertiary}
+              shape={SHAPE.square}
+            >
+              <Icons.Redo size={24} />
+            </Button>
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
