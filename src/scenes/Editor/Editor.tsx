@@ -16,6 +16,10 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const editorConfig = {
+    clipToFrame: true,
+    scrollLimit: 0,
+  }
   return (
     <div
       style={{
@@ -33,7 +37,7 @@ function App() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
           <Toolbox />
           <div style={{ flex: 1, display: 'flex', padding: '1px' }}>
-            <Editor />
+            <Editor config={editorConfig} />
           </div>
           <Footer />
         </div>
